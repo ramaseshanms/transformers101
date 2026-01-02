@@ -71,6 +71,21 @@
             <p><strong>Key concept:</strong> The <span style="color:#00d4ff">Queries</span> come from the Decoder (what
                 I'm translating now), but the <span style="color:#00ff88">Keys and Values</span> come from the Encoder
                 (the original sentence).</p>
+
+            <div class="analogy-box"
+                style="margin-top: 20px; border-left: 4px solid #00d4ff; padding-left: 15px; background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top:0; color: #00d4ff;">👨‍🍳 ELI12: The Chef Analogy</h3>
+                <p>Imagine a Chef (Decoder) trying to cook a dish based on a Recipe Video (Encoder).</p>
+                <ul>
+                    <li><strong>Decoder Query:</strong> The Chef pauses and asks, "How many eggs do I need?"</li>
+                    <li><strong>Encoder Key:</strong> The video has many distinct moments (chopping, frying, mixing).
+                    </li>
+                    <li><strong>Cross-Attention:</strong> The Chef scans the video to find the "Mixing Eggs" scene (High
+                        score match).</li>
+                    <li><strong>Encoder Value:</strong> The Chef watches that specific part to get the info ("3 Eggs").
+                    </li>
+                </ul>
+            </div>
         </section>
 
         <section id="demo">

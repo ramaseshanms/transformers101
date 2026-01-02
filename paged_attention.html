@@ -104,6 +104,20 @@
             <h2>The Fragmentation Problem</h2>
             <p>During generation, KV caches grow. Storing them contiguously is wasteful. Paged Attention breaks them
                 into non-contiguous blocks, just like OS virtual memory.</p>
+
+            <div class="analogy-box"
+                style="margin-top: 20px; border-left: 4px solid var(--accent-color); padding-left: 15px; background: rgba(124, 58, 237, 0.1); padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top:0; color: var(--accent-color);">📒 ELI12: The Notebook Analogy</h3>
+                <p>Imagine writing a very long essay in a notebook.</p>
+                <ul>
+                    <li><strong>Traditional System:</strong> You must leave 50 blank pages perfectly in order <em>just
+                            in case</em> your essay gets long. If you only write 1 page, 49 are wasted!</li>
+                    <li><strong>Paged Attention:</strong> You write on whatever loose leaf of paper you find. You just
+                        keep a "Table of Contents" (Block Table) that says: "Page 1 is on desk, Page 2 is on the shelf,
+                        Page 3 is under the cat."</li>
+                </ul>
+                <p>No wasted space, and you can stitch the story together perfectly when reading!</p>
+            </div>
         </section>
 
         <section id="demo">
