@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paged Attention | Transformers 101</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .memory-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .mem-col {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 300px;
+        }
+
+        .block-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .kv-block {
+            aspect-ratio: 1;
+            border: 1px solid var(--matrix-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .kv-block.occupied {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .kv-block.mapped-target {
+            background: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+            color: #000;
+        }
+
+        .arrow-path {
+            position: absolute;
+            height: 2px;
+            background: red;
+            transform-origin: 0 50%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        #log {
+            margin-top: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            height: 100px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <nav style="padding: 20px;">
+        <div class="container">
+            <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 600;">← Back
+                to Home</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Paged <span class="highlight">Attention</span></h1>
+            <p class="subtitle">Efficient Memory Management for Large Language Models.</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section>
+            <h2>The Fragmentation Problem</h2>
+            <p>During generation, KV caches grow. Storing them contiguously is wasteful. Paged Attention breaks them
+                into non-contiguous blocks, just like OS virtual memory.</p>
+        </section>
+
+        <section id="demo">
+            <div class="interactive-controls">
+                <button id="btn-add-token" class="btn primary">Generate Token</button>
+                <button id="btn-reset" class="btn" style="background: #333">Reset</button>
+            </div>
+
+            <div class="memory-container">
+                <div class="mem-col">
+                    <h3>Logical KV Cache</h3>
+                    <p style="font-size: 0.9rem; color: #888">Continuous implementation view</p>
+                    <div id="logical-mem" class="block-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <div class="mem-col">
+                    <h3>Physical Block Table</h3>
+                    <p style="font-size: 0.9rem; color: #888">Actual GPU Memory (Scattered)</p>
+                    <div id="physical-mem" class="block-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="log">System Ready...</div>
+
+        </section>
+
+    </main>
+
+    <script src="js/paged_attention.js"></script>
+</body>
+
+</html>
